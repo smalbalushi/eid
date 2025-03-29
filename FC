@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample HTML Page with Image and Label</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: "Cairo", sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f4f4f4;
+        }
+        .container {
+            text-align: center;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .image-container {
+            position: relative;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .label {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            background: rgba(0, 0, 0, 0);
+            color: #FFFFFF;
+font-size: 2.8vw;
+        }
+        .label.primary {
+            bottom: 12%;
+			
+        }
+        .label.secondary {
+            bottom: 12%;
+			
+        }
+        .input-container {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+	<img src="https://i.postimg.cc/8zqxqvC1/FC-logo.png" style="width:150px;" />
+        <h3 style="text-align:center;">بطاقة المعايدة</h1>
+        <div class="input-container">
+            <label for="nameInput">اسمك بالعربي: </label>
+            <input type="text" id="nameInput" placeholder="اسمك بالعربي">
+            <br><br>
+            <label for="additionalInput">Your Name in English: </label>
+            <input type="text" id="additionalInput" placeholder="Your Name English">
+            <br><br>
+            <button class="ct-button" onclick="updateLabel()">Accept</button>
+        </div>
+        <div class="image-container" id="imageContainer">
+            <img src="https://i.postimg.cc/C10XKVDX/eid-card.png" alt="Sample Image" id="sampleImage">
+            <div class="label primary" id="imageLabel"></div>
+            <div class="label secondary" id="additionalLabel"></div>
+        </div>
+       <div><br><button class="ct-button" onclick="downloadImage()">Download Image</button></div> 
+		
+    </div>
+
+    <script>
+        function updateLabel() {
+            var nameInput = document.getElementById('nameInput').value;
+            var additionalInput = document.getElementById('additionalInput').value;
+            var imageLabel = document.getElementById('imageLabel');
+            var additionalLabel = document.getElementById('additionalLabel');
+            imageLabel.textContent = nameInput ? nameInput : '';
+            additionalLabel.textContent = additionalInput ? additionalInput : '';
+        }
+
+        function downloadImage() {
+            var imageContainer = document.getElementById('imageContainer');
+            html2canvas(imageContainer, {useCORS: true}).then(function(canvas) {
+                var link = document.createElement('a');
+                link.href = canvas.toDataURL('image/png');
+                link.download = 'image.png';
+                link.click();
+            });
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</body>
+</html>
